@@ -2,6 +2,8 @@
 find_package(CURL REQUIRED)
 
 include_directories(${MineGet_SOURCE_DIR}/MineGet/include)
+include_directories(${MineGet_SOURCE_DIR}/external)
+
 add_executable(mineget
     mineget.cc
     parseCommands.cc
