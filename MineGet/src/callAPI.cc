@@ -1,5 +1,7 @@
 #include <string>
+#include <memory>
 #include <curl/curl.h>
+#include <nlohmann/json.hpp>
 
 #include "callAPI.hh"
 #include "callType.hh"
@@ -53,6 +55,16 @@ std::string* APICaller::makeCall(std::string url, CallType callType) {
             setRestResult(buffer);
             return restResult;
         }
+    }
+
+    return nullptr;
+}
+
+std::unique_ptr<nlohmann::json> APICaller::getData(std::string url, CallType callType) {
+    std::string* response = this->makeCall(url, CallType::GET);
+    if (response) {
+        nlohmann::json parsedResponse = nlohmann::json::parse(*response);
+        return std::make_unique<nlohmann::json>(parsedResponse);
     }
 
     return nullptr;
