@@ -17,9 +17,9 @@ private:
     struct curl_slist* headers {NULL};
 
     void setRestResult(std::string* str);
-    std::string* makeCall(std::string url, CallType callType);
 public:
     APICaller();
     virtual ~APICaller();
+    std::string* makeCall(std::string url, CallType callType);
     std::unique_ptr<nlohmann::json> getData(std::string url, CallType callType);
 };
